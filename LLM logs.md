@@ -33,3 +33,10 @@ Prompt: "I'm running a background script to update the faculty data every hour, 
 Issue: Version incompatibility between numpy and torch/sentence-transformers.
 
 Prompt:"pip install -r requirements.txt is failing because of a conflict with torch versions required by sentence-transformers. How do I resolve this issue?
+
+can you rewrite this to how a student would write it
+
+6. Port Mismatch (Docker)
+Issue:The UI runs on localhost, but it can’t connect to the backend in Docker because the API is on port 10000 while the UI is trying to use port 8000.
+
+Prompt:"I’m running my Docker app on localhost:10000, and the UI loads fine, but when I try to use it, I get a connection refused error for localhost:8000. Why is it still trying to connect to port 8000 instead of 10000,How do I resolve this issue?"
