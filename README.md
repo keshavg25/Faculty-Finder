@@ -1,4 +1,5 @@
-# Faculty Research Semantic Search
+# Faculty Research
+A semantic search engine designed to help students and researchers find faculty members at DA-IICT based on their research interests, biography, and publications.
 
 ## Overview
 This project is a Semantic Search Engine designed to help students and researchers find faculty members at DA-IICT based on their research interests, biography, and publications. It scrapes faculty profiles from the official website, processes the data, and provides a semantic search API using sentence transformers.
@@ -18,16 +19,20 @@ This project is a Semantic Search Engine designed to help students and researche
 - **Storage**: Stores faculty data in a SQLite database.
 - **Semantic Search**: Uses `all-MiniLM-L6-v2` (SentenceTransformer) to generate embeddings for faculty bios and research interests, enabling natural language search queries.
 - **REST API**: fastAPI-based backend to serve faculty data and search results.
-
+- **Docker Support**: Containerized application for easy deployment.
+  
 ## Data Statistics
 The cleaned dataset in `faculty_search.db` contains the following statistics:
 - **Total Cleaned Records**: 111
+- **Average cleaned text length**: 2733.5 characters
 - **Total Columns**: 8
 - **Columns**: `id`, `name`, `department`, `bio`, `research_interests`, `education`, `bio_text_clean`, `profile_url`
   - **Records with Missing Bio**: 4
   - **Records with Missing research_interests**: 3
+  
 
 ## Project Structure
+
 ```
 Faculty-Finder/
 ├── api/
@@ -44,10 +49,13 @@ Faculty-Finder/
 │   └── database.py         # SQLite database operations
 ├── transformation/
 │   └── etl.py              # Extract, Transform, Load logic
+├── ui/                     # Frontend static files (HTML/CSS/JS)
+├── Dockerfile              # Docker configuration
 ├── requirements.txt        # Python dependencies
-├── main.py                 # (Optional) Alternative entry point
+├── main.py                 # Alternative entry point
 └── faculty_search.db       # SQLite database file
 ```
+
 ## Schema
 ```
 def create_tables(conn):
@@ -66,6 +74,13 @@ def create_tables(conn):
     """
 ```
 ## Installation
+
+### Prerequisites
+
+-   Python 3.8 or higher
+-   Docker (optional, for containerized deployment)
+
+### Local Setup
 
 1. **Clone the repository** (if applicable).
 2. **Install Dependencies**:
@@ -105,6 +120,22 @@ python api/main.py
 ```
 The API will be available at `http://localhost:8000`.
 
+## Docker Support
+
+You can also run the application using Docker.
+
+1.  **Build the Docker image:**
+    ```bash
+    docker build -t faculty-finder .
+    ```
+
+2.  **Run the container:**
+    ```bash
+    docker run -p 10000:10000 faculty-finder
+    ```
+    The application will be accessible at `http://localhost:10000`.
+
+
 ## API Endpoints
 
 Once the server is running, access the interactive API documentation at:
@@ -118,3 +149,6 @@ Once the server is running, access the interactive API documentation at:
 - `GET /faculty/{faculty_id}`: Retrieve details of a specific faculty member.
 - `GET /search?q={query}&k={limit}`: Perform a semantic search.
   - Example: `http://localhost:8000/search?q=machine%20learning&k=3`
+ 
+## License
+[MIT License](LICENSE)
